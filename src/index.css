@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F9F7F2;
+  --text: #1B2621;
+  --accent: #A68966;
+  --surface: #E5E5E5;
+  --light: #FFFFFF;
+  --ease-luxury: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+/* Image hover scale */
+.img-hover-container {
+  overflow: hidden;
+}
+.img-hover-container img {
+  transition: transform 0.8s var(--ease-luxury);
+  transform: translateZ(0);
+}
+.img-hover-container:hover img {
+  transform: scale(1.03);
+}
+
+/* Button fill animation */
+.btn-fill {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn-fill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-luxury);
+  z-index: -1;
+}
+.btn-fill:hover::before {
+  transform: scaleX(1);
+}
+
+/* Ghost button */
+.btn-ghost {
+  border: 1px solid var(--text);
+  transition: background-color 0.6s var(--ease-luxury), color 0.6s var(--ease-luxury);
+}
+.btn-ghost:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Product card cross-fade */
+.product-card .product-detail {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-luxury);
+}
+.product-card:hover .product-detail {
+  opacity: 1;
+}
+.product-card .product-main {
+  transition: opacity 0.6s var(--ease-luxury);
+}
+.product-card:hover .product-main {
+  opacity: 0;
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s var(--ease-luxury);
+}
+.mobile-nav-overlay.open {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Gallery */
+.gallery-main-image {
+  transition: opacity 0.4s var(--ease-luxury);
+}
+.gallery-thumb-active {
+  ring-offset-width: 2px;
+}
+
+/* Drawer */
+.inquiry-drawer {
+  transform: translateX(100%);
+  transition: transform 0.6s var(--ease-luxury);
+}
+.inquiry-drawer.open {
+  transform: translateX(0);
+}
