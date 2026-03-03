@@ -196,7 +196,7 @@ const PROJECTS = [
 
 /* ─── Navbar ─── */
 
-function Navbar({ inquiryCount, onCartClick, forceScrolled }) {
+function Navbar({ inquiryCount, onCartClick, forceScrolled, onLogoClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -233,7 +233,7 @@ function Navbar({ inquiryCount, onCartClick, forceScrolled }) {
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-          <a href="#" className={`font-sans font-semibold tracking-[0.25em] text-sm transition-colors duration-700 ${forceLight ? 'text-deep-forest' : 'text-white'}`}>
+          <a href="#" onClick={(e) => { e.preventDefault(); onLogoClick(); }} className={`font-sans font-semibold tracking-[0.25em] text-sm transition-colors duration-700 ${forceLight ? 'text-deep-forest' : 'text-white'}`}>
             TANNUM
           </a>
 
@@ -1166,6 +1166,7 @@ export default function App() {
         inquiryCount={inquiryItems.length}
         onCartClick={() => setDrawerOpen(true)}
         forceScrolled={!!selectedProduct}
+        onLogoClick={handleGoBack}
       />
       {selectedProduct ? (
         <ProductPage
