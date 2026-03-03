@@ -196,7 +196,7 @@ const PROJECTS = [
 
 /* ─── Navbar ─── */
 
-function Navbar({ inquiryCount, onCartClick }) {
+function Navbar({ inquiryCount, onCartClick, forceScrolled }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -220,7 +220,7 @@ function Navbar({ inquiryCount, onCartClick }) {
   }, []);
 
   const menuOpen = activeMenu !== null;
-  const forceLight = menuOpen || scrolled;
+  const forceLight = menuOpen || scrolled || forceScrolled;
 
   return (
     <>
@@ -1165,6 +1165,7 @@ export default function App() {
       <Navbar
         inquiryCount={inquiryItems.length}
         onCartClick={() => setDrawerOpen(true)}
+        forceScrolled={!!selectedProduct}
       />
       {selectedProduct ? (
         <ProductPage
